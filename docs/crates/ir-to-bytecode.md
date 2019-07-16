@@ -1,18 +1,17 @@
 ---
 id: ir-to-bytecode
-title: Move IR Compiler
-custom_edit_url: https://github.com/libra/libra/edit/master/language/compiler/README.md
+title: Move IR 编译器
 ---
 
 ## 摘要
 
-Move IR编译器将Move IR编译为其字节码表示形式。 
+Move IR编译器将Move IR编译为其字节码表示形式。
 
 ## 概要
 
-Move IR编译器编译使用Move语言编写模块和脚本，以字节码形式表示的，这两种数据类型用于表示这些输出 `CompiledModule` 和 `CompiledScript`. 这些数据类型在 [file_format.rs](https://github.com/libra/libra/blob/master/language/vm/src/file_format.rs) 中有定义.
+Move IR编译器把Move语言编写模块和脚本编译为对应以字节码表示形式，有两种数据类型用于表示这些输出： `CompiledModule` 和 `CompiledScript`. 这些数据类型在 [file_format.rs](https://github.com/libra/libra/blob/master/language/vm/src/file_format.rs) 中有定义.
 
-Move IR除了把模块和脚本转换为Move字节码之外，编译器的目的也是作为一个字节码验证器的测试工具。 因此，它的工作是输出尽可能与输入IR字节码程序接近; 在编译过程中，不会执行优化和高级语义检查。事实上，编译器会将这些语义检查推入字节码。并在Move IR中将语义上无效的代码编译为等价的—语义上无效的—字节码程序。然后由 [bytecode verifier](https://github.com/libra/libra/blob/master/language/bytecode_verifier/README.md) 验证编译后的字节码的语义. 编译器命令行在编译结束时自动调用字节码验证器。
+除了把Move IR转换为Move字节码之外，编译器也可以作为字节码验证器当作一个测试工具。 因此，它的字节码程序输出会尽可能与输入IR接近; 在编译过程中，不会执行优化和高级语义检查。事实上，即使是 Move IR 语义上无效的代码也会对应的字节码程序， 然后由 [bytecode verifier](https://github.com/libra/libra/blob/master/language/bytecode_verifier/README.md) 验证编译后的字节码的语义. 编译器命令行在编译结束时自动调用字节码验证器。
 
 ## 命令行选项
 
@@ -40,7 +39,7 @@ ARGS:
 
 > cargo build -—bin compiler
 
-* 这将构建编译器+验证器二进制文件。
+* 这将构建 编译器+验证器 二进制文件。
 * 二进制文件可以在 `libra/target/debug/compiler` 找到.
 * 此外，二进制文件也可以直接使用 `cargo run -p compiler` 运行.
 

@@ -19,5 +19,10 @@
 | docs/crates/crypto.md        | 完成 | 明杰 | Tiny熊  |  7/03 |
 | docs/crates/execution.md        | 完成 | 明杰 | Tiny熊  |  7/09 |
 | docs/crates/mempool.md        | 完成 | 明杰 | Tiny熊  |  7/10 |
-
-
+| docs/crates/ir-to-bytecode.md    | 完成 | 明杰 |  Tiny熊 |  7/15 |
+| docs/crates/move-language.md  | 完成 | 明杰 | Tiny熊  |  7/15 |
+| docs/crates/network.md  | 完成 | 明杰 | Tiny熊 |  7/15 |
+| docs/crates/storage.md  | 待校对 | 明杰 |   |  7/15 |
+| docs/crates/vm.md  | 待校对 | 明杰 |   |  7/15 |
+| docs/reference/glossary.md  | 待校对 | 明杰 |   |  7/15 |
+| docs/reference/libra-cli.md | 待校对 | 明杰 |   |  7/15 |

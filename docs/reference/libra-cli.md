@@ -23,7 +23,7 @@ cargo run -p libra_swarm -- -s
 ```
 `-s` 选项使CLI在本地Libra网络启动后运行。 请注意，这可能需要几分钟才能构建然后启动。
 
-### 运行CLI客户端以连接到任一Libra网络
+### 运行CLI客户端以连接到任意Libra网络
 要调用CLI客户端并自行配置，请运行：
 
 ```bash
