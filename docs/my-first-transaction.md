@@ -179,7 +179,7 @@ User account index: 1, address: 8337aac709a41fe6be03cad8878a0d4209740b1608f8a815
 
 在testnet上创建和铸币是通过Faucet完成的。 Faucet是一种与testnet一起运行的服务。 此服务仅用于为testnet创建硬币，并不用运行在[主网](reference/glossary.md#mainnet)上. 它创建的Libra 币并没有真实的价值，假设[创建Alice和Bob的账户](#创建Alice和Bob的账户), 分别使用了索引0和索引1，您可以按照以下步骤将Libra 币添加到两个帐户。
 
-### 步骤1: 添加100个Libra到Alice账户
+### 步骤1: 添加110个Libra到Alice账户
 
 铸造Libra币，并添加到Alice的帐户，输入以下命令:
 
