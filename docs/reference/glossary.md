@@ -420,11 +420,11 @@ title: Glossary
 ### 交易脚本
 
 * 用户提交的每个交易都包括**交易脚本**。
-* It represents the operation a client submits to a validator node.  
-* The operation could be a request to move coins from user A to user B, or it could involve interactions with published [Move模块](#move模块)/smart contracts.
-* The transaction script is an arbitrary program that interacts with resources published in the global storage of the Libra Blockchain by calling the procedures of a module. It encodes the logic for a transaction.
-* A single transaction script can send funds to multiple recipients and invoke procedures from several different modules.
-* A transaction script **is not** stored in the global state and cannot be invoked by other transaction scripts. It is a single-use program.
+* 它表示客户端提交给验证程序节点的操作。
+* 该操作可以是将币从用户A转移到用户B的请求，或者可以涉及与已发布的[Move模块](#move模块)/和智能合约的交互。
+* 交易脚本是一个自定义程序，它通过调用模块的过程与Libra 区块链的全局存储中发布的资源进行交互。 它编码交易的逻辑。
+* 单个交易脚本可以将资金发送给多个收件人，并从多个不同的模块调用过程。
+* 交易脚本**不会**存储在全局状态中，也不能由其他交易脚本调用。 这是一次性使用的程序。
 
 ## V
 
@@ -432,29 +432,29 @@ title: Glossary
 
 ### 验证器节点
 
-* *Alternate name*: Validators.
-* A **validator** is an entity of the Libra ecosystem that validates the Libra Blockchain. It receives requests from clients and runs consensus, execution, and storage.
-* A validator maintains the history of all the transactions on the blockchain.
-* Internally, a validator node needs to keep the current state, to execute transactions and to calculate the next state. 
+* *别名*: 验证器.
+* **验证器** 是Libra生态系统的一个实体，用于验证Libra 区块链。 它接收来自客户端的请求并运行共识，执行和存储。
+* 验证器维护区块链上所有交易的历史记录。
+* 在内部，验证器节点需要保持当前状态，执行交易并计算下一个状态。
 
-### Version
+### 版本号
 
-* A **version** is also called “height” in blockchain literature. 
-* The Libra Blockchain doesn't have an explicit notion of a block &mdash; it only uses blocks for batching and executing transactions.  
-* A transaction at height 0 is the first transaction (genesis transaction), and a transaction at height 100 is the 101th transaction in the transaction store.
+* **版本号** 在区块链文献中也称为“区块高度”。
+* Libra区块链没有明确的区块概念 &mdash; 它只使用块来批处理和执行交易。
+* 高度为0的交易是第一个交易（创世交易），高度为100的交易是交易存储中的第101个交易。
 
 ## W
 
 * * *
 
-### Well Formed Transaction
+### 良好的交易形成
 
-A Libra transaction is **well formed** if each of the following conditions are true for the transaction:
-* The transaction has a valid signature.
-* An account exists at the sender address.
-* It includes a public key, and the hash of the public key matches the sender account's authentication key. 
-* The sequence number of the transaction matches the sender account's sequence number.
-* The sender account's balance is greater than the [maximum gas amount](#maximum-gas-amount).
-* The expiration time of the transaction has not passed.
+如果以下每个条件都在交易中满足，则Libra交易 **形成良好**：
+* 交易具有有效签名。
+* 发件人地址存在一个帐户。
+* 它包含一个公钥，公钥的哈希值与发件人帐户的身份验证密钥相匹配。
+* 交易的序列号与发件人帐户的序列号相匹配。
+* 发件人帐户的余额大于 [最大Gas量](#最大Gas量).
+* 交易的到期时间尚未过去。
 
 
