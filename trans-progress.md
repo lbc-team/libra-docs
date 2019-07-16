@@ -26,3 +26,4 @@
 | docs/crates/vm.md  | 待校对 | 明杰 |   |  7/15 |
 | docs/reference/glossary.md  | 待校对 | 明杰 |   |  7/15 |
 | docs/reference/libra-cli.md | 待校对 | 明杰 |   |  7/15 |
+| docs/libra-open-source-paper.md.md | 待校对 | 子树 |   |  7/16 |
