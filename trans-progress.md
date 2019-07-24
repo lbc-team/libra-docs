@@ -24,6 +24,6 @@
 | docs/crates/network.md  | 完成 | 明杰 | Tiny熊 |  7/15 |
 | docs/crates/storage.md  | 待校对 | 明杰 |   |  7/15 |
 | docs/crates/vm.md  | 待校对 | 明杰 |   |  7/15 |
-| docs/reference/glossary.md  | 待校对 | 明杰 |   |  7/15 |
+| docs/reference/glossary.md  | 校对中 | 明杰 |   |  7/15 |
 | docs/reference/libra-cli.md | 待校对 | 明杰 |   |  7/15 |
 | docs/libra-open-source-paper.md.md | 完成 | 亚鹏 | Tiny熊  |  7/16 |

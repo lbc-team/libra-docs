@@ -6,7 +6,7 @@ title: Libra 协议核心概念
 
 Libra区块链是一个基于Libra协议通过加密认证的分布式数据库。本文档简要介绍了Libra协议中的关键概念，有关Libra协议中所有元素的详细说明，请参阅[Libra区块链技术白皮书](https://libra.org/en-US/white-paper/)。
 
-Libra区块链分布式网络由[验证器节点](reference/glossary.md#validator-node)来维护。或简称称为验证器。验证人（验证节点）通过遵守[共识协议](reference/glossary.md#consensus-protocol)来达成区块链中的交易的一致。
+Libra区块链分布式网络由[验证器节点](reference/glossary.md#验证器节点)来维护。或简称称为验证器。验证人（验证节点）通过遵守[共识协议](reference/glossary.md#共识协议)来达成区块链中的交易的一致。
 
 Libra 测试网络（testnet）是区块链协议实现早期原型即Libra Core 的展示。
 
@@ -65,7 +65,7 @@ Libra区块链中的所有数据都保存在单个版本化分布式数据库中
 
 ## 账户
 
-Libra账户包含 Move 模块(modules)和Move 资源(resources)。账户通过[账户地址](reference/glossary.md#account-address)来标识。这意味上每个账户的状态都包含代码和数据：
+Libra账户包含 Move 模块(modules)和Move 资源(resources)。账户通过[账户地址](reference/glossary.md#账户地址)来标识。这意味上每个账户的状态都包含代码和数据：
 
 * **[Move 模块](move-overview.md#move-modules-allow-composable-smart-contracts)** 包含代码（类型和过程声明），但他们不包含数据。模块过程（procedures）编码了更新区块链的全局状态的规则。
 
@@ -112,7 +112,7 @@ Libra 区块链的客户创建交易并将其提交到验证器节点。验证�
 
 **共识 Consensus**
 
-* 共识组件的负责对交易区块进行排序，并与网络中的其他验证器节点在[共识协议](reference/glossary.md#consensus)下商定执行结果。
+* 共识组件的负责对交易区块进行排序，并与网络中的其他验证器节点在[共识协议](reference/glossary.md#共识)下商定执行结果。
 
 **执行 Execution**
 
