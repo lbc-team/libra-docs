@@ -48,7 +48,7 @@ $ cargo test
 如果你的pull请求被Libra的任何项目接受，你需要签一个CLA。在Libra的任何开源项目中，你只需要这样做一次。代表自己个人可以签署 [Individual CLA](https://github.com/libra/libra/blob/master/contributing/individual-cla.pdf). 如果你是代表你的雇主贡献，请让他们签署 [Corporate CLA](https://github.com/libra/libra/blob/master/contributing/corporate-cla.pdf).
 
 ## 行为守则
-请参阅 [行为守则](../policies/行为守则.md), 它描述了社区内交互的准则。
+请参阅 [行为守则](../policies/行为守则.md), 它描述社区内交互的准则。
 
 ## 问题
 
