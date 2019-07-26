@@ -1,6 +1,6 @@
 ---
-id: coding-guidelines
-title: Coding Guidelines
+id: 编码指南
+title: 编码指南
 ---
 
 This document describes the coding guidelines for the Libra Core Rust codebase.  
