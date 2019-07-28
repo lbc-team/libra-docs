@@ -1,5 +1,5 @@
 ---
-id: 编码指南
+id: coding-guidelines
 title: 编码指南
 ---
 
