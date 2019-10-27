@@ -3,43 +3,47 @@ id: coding-guidelines
 title: 编码指南
 ---
 
-This document describes the coding guidelines for the Libra Core Rust codebase.  
+原文链接：[https://developers.libra.org/docs/community/coding-guidelines](https://developers.libra.org/docs/community/coding-guidelines)<br/>
+译者：Humyna<br/>
+译者注：该文档官方会不定期升级，翻译版本基于2019.9.22网站状态版本。<br/>
 
-## Code Formatting
+文档描述了Libra Core Rust代码库的编码指南。
 
-All code formatting is enforced with [rustfmt](https://github.com/rust-lang/rustfmt) using a project specific configuration.  Here is a sample command to run `rustfmt` and adhere to the project conventions:
+## 代码格式化
+
+所有的代码格式都是使用了项目的特定配置的 [rustfmt](https://github.com/rust-lang/rustfmt)来实现的。下面是一个运行`rustfmt`并遵守项目约定的简单命令：
 
 ```
 libra$ cargo fmt
 ```
 
-## Code Analysis
+## 代码分析
 
-[Clippy](https://github.com/rust-lang/rust-clippy) is used to catch common mistakes and is run as a part of continuous integration. Before submitting your code for review, you can run clippy with our configuration: 
+[Clippy](https://github.com/rust-lang/rust-clippy) 用于捕捉常见错误，并作为持续集成的一部分运行。在提交您的代码进行审查之前，您可以使用我们的配置运行clippy：
 
 ```
 libra$ ./scripts/clippy.sh
 ```
 
-In general, we follow the recommendations from [rust-lang-nursery](https://rust-lang-nursery.github.io/api-guidelines/about.html). The remainder of this guide provides detailed guidelines on specific topics, to achieve uniformity of the codebase.
+一般来说，我们遵循 [rust-lang-nursery](https://rust-lang-nursery.github.io/api-guidelines/about.html)的提议。本指南的其余部分提供了有关特定主题的详细指南，以实现代码库的一致性。
 
+## 代码文档
 
-## Code Documentation
+任何共有属性fields，函数和方法应该使用[Rustdoc](https://doc.rust-lang.org/book/ch14-02-publishing-to-crates-io.html#making-useful-documentation-comments)生成文档。
 
-Any public fields, functions, and methods should be documented with [Rustdoc](https://doc.rust-lang.org/book/ch14-02-publishing-to-crates-io.html#making-useful-documentation-comments). Follow the conventions described below for modules, structs, enums, and functions. The content on the *[single line]* shown in the following example is used as a preview in the generated rust documentation. Refer to the 'Structs' and 'Enums' sections in the [collections](https://doc.rust-lang.org/std/collections/index.html) Rustdoc, for examples.
+对于模块、结构、枚举和函数请遵循下面的详细约定。当导航Rustdoc，单行_single line_用作预览。示例请参阅Rustdoc [collections](https://doc.rust-lang.org/std/collections/index.html) 中“结构Structs”和“枚举enums”部分。
 
+```
+/// [Single line] One line summary description
+///
+/// [Longer description] Multiple lines, inline code
+/// examples, invariants, purpose, usage, etc.
+[Attributes] If attributes exist, add after Rustdoc
+```
 
- ```rust
- /// [Single line] One line summary description
- ///
- /// [Longer description] Multiple lines, inline code 
- /// examples, invariants, purpose, usage, etc. 
- [Attributes] If attributes exist, add after Rustdoc
- ```
+下面示例：
 
-Here is an example:
-
-```rust
+```
 /// Represents (x, y) of a 2-dimensional grid
 ///
 /// A line is defined by 2 instances.
@@ -51,153 +55,172 @@ struct Point {
 }
 ```
 
-### Constants and Fields
+### 常量和字段
 
-Describe the purpose and definition of the constants and fields in the code.
+描述此数据的目的和定义。
 
-### Functions and Methods
+### 函数和方法
 
-Document the following for each function:
+为每个函数记录以下内容:
 
-* The action the method performs — “This method *adds* a new transaction to the mempool.” Use *active voice* and *present tense* (i.e., adds/creates/checks/updates/deletes).
-* Describe how and why to use this method.
-* Any condition that must be met _before_ calling the method.
-* State conditions under which the method will `panic!()` or returns an `Error`
-* Provide a brief description of return values.
-* Clearly state any special behavior that is not obvious in the code itself.
 
-### README.md for Top-Level Directories and Other Major Components
+- 方法执行的操作——“该方法将一笔新交易加到mempool。”使用主动语态和现在时。
+- 描述如何和为什么使用这个方法
+- 调用方法之前必须满足的任何条件
+- 在什么状态条件下函数会`panic!()`或返回`Error`
+- 返回值的简要说明
+- 其他特殊行为说明
 
-Each major component of the system needs to have a `README.md` file. Major components are:
-* Top-level directories (e.g., `libra/network`, `libra/language`).
-* The most important crates in the system (e.g., `vm_runtime`).
 
-The README.md should contain:
+### 根目录的README和其他主要组件
 
- * The conceptual documentation of the component.
- * A link to external API documentation for the component.
+Libra Core每个主要组件都需要一个`README.md`文件。主要组件包括：
 
-You can refer to this sample README `libra/network/README.md` which describes the network crate.
 
-Here is a template for a README.md:
+- 根目录(如`libra/network`, `libra/language`)
+- 系统中最主要的crates(如`vm_runtime`)
 
-```markdown
+
+这个文件应该包含：
+
+
+- 组件的概念性文档。
+- 组件的外部API文档的链接。
+- 项目主许可证的链接。
+- 项目主贡献指南的链接。
+
+
+readmes的模板如下：
+
+```
 # Component Name
 
 [Summary line: Start with one sentence about this component.]
 
 ## Overview
 
-* Describe the purpose of this component and how the code in this directory works.
-* Describe the interaction of code in this directory with other components.
-* Describe the security model and assumptions about the crates in this directory. 
+* Describe the purpose of this component and how the code in
+this directory works.
+* Describe the interaction of the code in this directory with
+the other components.
+* Describe the security model and assumptions about the crates
+in this directory. Examples of how to describe the security
+assumptions will be added in the future.
 
 ## Implementation Details
 
-* Describe how the component is modeled. For example, why is the code organized the way it is?
+* Describe how the component is modeled. For example, why is the
+  code organized the way it is?
 * Other relevant implementation details.
 
 ## API Documentation
 
-For the external API of this crate refer to the API documentation.
+For the external API of this crate refer to [Link to rustdoc API].
 
-For a top-level directory, link to the most important APIs within. 
+[For a top-level directory, link to the most important APIs within.]
 
+## Contributing
+
+Refer to the Libra Project contributing guide [LINK].
+
+## License
+
+Refer to the Libra Project License [LINK].
 ```
 
-## Code Suggestions
+`libra/network/README.md是`README.md的一个不错的例子，它描述了网络crate。
 
-In the following sections we have suggested some best practices for a uniform codebase. We will investigate and identify the practices that can be enforced using Clippy. This information will evolve and improve over time.
+## 编码建议
 
-### Attributes
+在下面的小节中，我们为一致的代码库提出了一些最佳实践。我们将研究和识别可以使用clippy实施的实践。这些信息将随着时间的推移而发展和改善。
 
-Use appropriate attributes for handling dead code:
+### 属性
 
-```rust
+确保使用适当的属性来处理死代码：
+
+```
 // For code that is intended for production usage in the future
 #[allow(dead_code)]
-// For code that is only intended for testing and 
+// For code that is only intended for testing and
 // has no intended production use
 #[cfg(test)]
 ```
 
-### Avoid Deref Polymorphism
+### 避免Deref多态
 
-Don't abuse the Deref trait to emulate inheritance between structs, and reuse methods. For more information, read [here](https://github.com/rust-unofficial/patterns/blob/master/anti_patterns/deref.md).
+不要滥用Deref特性来模拟结构之间的继承，从而重用方法。有关详细信息，请阅读[here](https://github.com/rust-unofficial/patterns/blob/master/anti_patterns/deref.md)。
 
-### Comments
+### 注释
 
-We recommend that you use  `//` and `///` comments rather than block comments `/* ... */` for uniformity and easier grepping.  
+为了一致和simpler grepping，我们建议您使用 `//` 和 `///` 注释，而不是块注释 `/* ... */` 。
 
-### Cloning
+### 克隆
 
-If `x` is reference counted, prefer [`Arc::clone(x)`](https://doc.rust-lang.org/std/sync/struct.Arc.html) over `x.clone(). `Arc::clone(x) explicitly indicates that we are cloning `x`. This avoids confusion about whether we are performing an expensive clone of a `struct`, `enum,` or other type, or just a cheap reference copy.
+如果x是引用计数，请选择r [`Arc::clone(x)`](https://doc.rust-lang.org/std/sync/struct.Arc.html) 而不是 `x.clone()`。[`Arc::clone(x)`](https://doc.rust-lang.org/std/sync/struct.Arc.html) 显式地表示我们正在克隆x。这避免了我们是执行结构体、枚举、其他类型的昂贵克隆，还是只执行廉价的引用副本的困惑。
 
-Also, if you are passing around [`Arc<T>`](https://doc.rust-lang.org/std/sync/struct.Arc.html) types, consider using a newtype wrapper:
+此外，如果要传递 [`Arc<T>`](https://doc.rust-lang.org/std/sync/struct.Arc.html) 类型，请考虑使用新的类型包装器：
 
-```rust
+```
 #[derive(Clone, Debug)]
 pub struct Foo(Arc<FooInner>);
 ```
 
-### Concurrent Types
+### 并发类型
 
-Concurrent types such as [`CHashMap`](https://docs.rs/crate/chashmap), [`AtomicUsize`](https://doc.rust-lang.org/std/sync/atomic/struct.AtomicUsize.html), etc. have an immutable borrow on self, i.e. `fn foo_mut(&self,...),` to support concurrent access on interior mutating methods. Good practices (such as those in the examples mentioned) avoid exposing synchronization primitives externally (e.g. `Mutex`, `RwLock`) and document the method semantics and invariants clearly.
+并发类型如 [`CHashMap`](https://docs.rs/crate/chashmap), [`AtomicUsize`](https://doc.rust-lang.org/std/sync/atomic/struct.AtomicUsize.html) 等为了支持内部转换方法的并发访问，有一个对自身不可改变的引用，如 `fn foo_mut(&self,...)` 。好的实践（像示例中提到的这些）是避免在外部暴露同步原语(如 `Mutex`, `RwLock`)，并清楚地记录方法语义和不变量。
 
-**When to use channels versus concurrent types?**
+什么时候使用通道(_channels)_与并发类型(_concurrent types)_？
 
-Here are some high-level suggestions:
+下面列出的是基于经验的高级建议：
 
-* Channels are for ownership transfer, decoupling of types, and coarse grained messages. They fit well for transferring ownership of data, distributing units of work, and communicating async results. Furthermore, they help break circular dependencies (e.g. `struct Foo` contains an `Arc<Bar>` and `struct Bar` contains an `Arc<Foo>` that leads to complex initialization).
 
-* Concurrent types (such as [`CHashMap`](https://docs.rs/crate/chashmap) or structs that have interior mutability building on [`Mutex`](https://doc.rust-lang.org/std/sync/struct.Mutex.html), [`RwLock`](https://doc.rust-lang.org/std/sync/struct.RwLock.html), etc.) are better suited for caches and states.
+- 通道(Channels)用于所有权转移、类型分离和粗粒度消息。它们非常适合于传输数据的所有权、分发工作单元和异步结果通知。此外，它们有助于打破循环依赖（例如， `struct Foo` 包含一个 `Arc<Bar>` ， `struct Bar` 包含一个 `Arc<Foo>` 会导致复杂的初始化）。
+- 并发类型(Concurrent types)（例如 [`CHashMap`](https://docs.rs/crate/chashmap) 或在[`Mutex`](https://doc.rust-lang.org/std/sync/struct.Mutex.html), [`RwLock`](https://doc.rust-lang.org/std/sync/struct.RwLock.html)等上构建内部可变的结构体）更适合于缓存和状态。
 
-### Error Handling
 
-Error handling suggestions follow the [Rust book guidance](https://doc.rust-lang.org/book/ch09-00-error-handling.html). Rust groups errors into two major categories: recoverable and unrecoverable errors. Recoverable errors should be handled with [Result](https://doc.rust-lang.org/std/result/).  For our suggestions on unrecoverable errors, see below:
+### 错误处理
 
-**Panic**
+错误处理建议遵循 [Rust book guidance](https://doc.rust-lang.org/book/ch09-00-error-handling.html)。Rust将错误分为两大类：可恢复的和不可恢复的错误。应使用 [Result](https://doc.rust-lang.org/std/result/) 处理可恢复的错误。我们对不可恢复错误的建议如下：
 
-* `panic!()` - Runtime panic! should only be used when the resulting state cannot be processed going forward. It should not be used for any recoverable errors.
-* `unwrap()` - Unwrap should only be used for mutexes (e.g. `lock().unwrap()`) and test code. For all other use cases, prefer `expect()`. The only exception is if the error message is custom-generated, in this case use `.unwrap_or_else(|| panic!("error: {}", foo))`
-* `expect()` - Expect should be invoked when a system invariant is expected to be preserved. expect() is preferred over unwrap() and it should have a detailed error message on failure in most cases.
-* `assert!()` - This macro is kept in both debug/release and should be used to protect invariants of the system as necessary
-* `unreachable!()` - This macro will panic on code that should not be reached (violating an invariant), and it can be used where appropriate.
+_Panic_
 
-### Generics
+- `panic!()` - Runtime panic!仅当结果状态无法继续处理时才应使用。它不能用于任何可恢复的错误。
+- `unwrap()` -Unwrap 只能用于互斥锁（例如`lock().unwrap()`）和测试代码。对于所有其他用例，首选`expect()`。唯一的例外是如果错误消息是自定义生成的，在这种情况下使用 `.unwrap_or_else(|| panic!("error: {}", foo))`
+- `expect()` - Expect应在系统预留的不变量时调用。`expect()` 优先于 `unwrap()`，并且在大多数情况下都应该包含失败时的详细错误消息。
+- `assert!()` - 这个宏保存在debug/release中，必要时应该用来保护系统的不变量。
+- `unreachable!()` - 此宏将在不可达（违反不变量）的代码上死机，可在适当的情况下使用。
 
-Generics allow dynamic behavior (similar to [`trait`](https://doc.rust-lang.org/book/ch10-02-traits.html) methods) with static dispatch. As the number of generic type parameters increase, the difficulty of using the type/method also increases (e.g. you have to consider the combination of trait bounds required for this type, duplicate trait bounds on related types, etc.). To avoid this complexity, we generally try to avoid using a large number of generic type parameters. We have found that converting code with a large number of generic objects to trait objects with dynamic dispatch often simplifies our code.
 
-### Getters and Setters
+### 泛型
 
-Exclude test code and set field visibility to private as much as possible. Private fields allow constructors to enforce internal invariants. Implement getters for data that consumers may need, but avoid setters unless mutable state is necessary.
+泛型允许静态调度的动态行为（类似于 [`trait`](https://doc.rust-lang.org/book/ch10-02-traits.html) 方法）。随着泛型类型参数数量的增加，使用类型/方法的难度也随之增加（例如，考虑此类型所需的特征边界的组合、相关类型上的重复特征边界等）。为了避免这种复杂性，我们通常尽量避免使用大量泛型类型参数。我们发现，使用动态调度将具有大量泛型对象的代码转换为trait对象通常会简化我们的代码。
 
-Public fields are most appropriate for [`struct`](https://doc.rust-lang.org/book/ch05-00-structs.html) types in the C spirit: compound, passive data structures without internal invariants.  Naming suggestions follow the guidance [here](https://rust-lang-nursery.github.io/api-guidelines/naming.html#getter-names-follow-rust-convention-c-getter) as shown below.
+### Getters/setters
 
-```rust
+除了测试代码，尽可能将字段可见性设置为private。私有字段允许构造函数强制使用内部不变量。为调用者可能需要的数据实现getters，除非需要可变状态否则避免使用setter。
+
+公共字段最适合C风格的 [`struct`](https://doc.rust-lang.org/book/ch05-00-structs.html) 类型：没有内部不变量的复合被动数据结构。命名建议遵循[指南](https://rust-lang-nursery.github.io/api-guidelines/naming.html#getter-names-follow-rust-convention-c-getter)，示例如下。
+
+```
 struct Foo {
     size: usize,
     key_to_value: HashMap<u32, u32>
 }
-
 impl Foo {
     /// Return a copy when inexpensive
     fn size(&self) -> usize {
         self.size
     }
-
     /// Borrow for expensive copies
     fn key_to_value(&self) -> &HashMap<u32, u32> {
         &self.key_to_value
     }
-
     /// Setter follows set_xxx pattern
     fn set_foo(&mut self, size: usize){
         self.size = size;
     }
-
-    /// For a more complex getter, using get_XXX is acceptable 
-    /// (similar to HashMap) with well-defined and 
+    /// For a more complex getter, using get_XXX is acceptable
+    /// (similar to HashMap) with well-defined and
     /// commented semantics
     fn get_value(&self, key: u32) -> Option<&u32> {
         self.key_to_value.get(&key)
@@ -205,23 +228,25 @@ impl Foo {
 }
 ```
 
-### Logging
+### 日志
 
-We currently use [slog](https://docs.rs/slog/) for logging.
+我们目前使用 [slog](https://docs.rs/slog/) 记录日志。
 
-* [error!](https://docs.rs/slog/2.4.1/slog/macro.error.html) - Error-level messages have the highest urgency in [slog](https://docs.rs/slog/). They are used for unexpected errors (e.g. exceeded the maximum number of retries to complete an RPC or inability to store data to local storage).
-* [warn!](https://docs.rs/slog/2.4.1/slog/macro.warn.html) - Warn-level messages help notify admins about automatically handled issues (e.g. retrying a failed network connection or receiving the same message multiple times, etc.).
-* [info!](https://docs.rs/slog/2.4.1/slog/macro.info.html) - Info-level messages are well suited for "one time" events (such as logging state on one-time startup and shutdown) or periodic events that are not frequently occurring - e.g. changing the validator set every day. 
-* [debug!](https://docs.rs/slog/2.4.1/slog/macro.debug.html) - Debug-level messages are frequently occurring (i.e. potentially > 1 message per second) and are not typically expected to be enabled in production.
-* [trace!](https://docs.rs/slog/2.4.1/slog/macro.trace.html) - Trace-level logging is typically only used for function entry/exit.
 
-### Testing
+- [error!](https://docs.rs/slog/2.4.1/slog/macro.error.html) - 错误级别的消息在 [slog](https://docs.rs/slog/) 中具有最高的紧急性。出现意外错误（例如，超过了完成 RPC 的最大重试次数或无法将数据存储到本地存储）。
+- [warn!](https://docs.rs/slog/2.4.1/slog/macro.warn.html) -警告级别的消息有助于通知管理员自动处理的问题（例如，重试失败的网络连接或多次接收同一消息等）。
+- [info!](https://docs.rs/slog/2.4.1/slog/macro.info.html) - 信息级消息非常适合“一次性”事件（例如一次性启动和关闭时的日志状态）或不经常发生的周期性事件（例如每天更改验证程序集）。
+- [debug!](https://docs.rs/slog/2.4.1/slog/macro.debug.html) - 调试级消息可以频繁地发生（即，潜在地每秒大于 1个消息），并且通常不期望在生产中启用。
+- [trace!](https://docs.rs/slog/2.4.1/slog/macro.trace.html) -跟踪级日志记录通常仅用于函数进入/退出。
 
-#### Unit tests
 
-Ideally, all code will be unit tested. Unit test files should exist in the same directory as `mod.rs,` and their file names should end in `_test.rs`. A module to be tested should have the test modules annotated with `#[cfg(test)]`. For example, if in a crate there is a db module, the expected directory structure is as follows:
+### 测试
 
-```plaintext
+_单元测试Unit tests_
+
+理想情况下，所有代码都应该进行单元测试。单元测试文件应该与 `mod.rs` 位于同一目录中，并且它们的文件名应该以 `_test.rs` 结尾。要测试的模块应该用 `#[cfg(test)]`注释测试模块。例如，如果crate有一个数据库模块，则预期的目录结构如下：
+
+```
 src/db                        -> directory of db module
 src/db/mod.rs                 -> code of db module
 src/db/read_test.rs           -> db test 1
@@ -230,21 +255,87 @@ src/db/access/mod.rs          -> directory of access submodule
 src/db/access/access_test.rs  -> test of access submodule
 ```
 
-#### Property-based tests
+_基于属性的测试Property-based tests_
 
-Libra contains [property-based tests](https://blog.jessitron.com/2013/04/25/property-based-testing-what-is-it/) written in Rust using the [`proptest` framework](https://github.com/AltSysrq/proptest). Property-based tests generate random test cases and assert that invariants, also called *properties*, hold about the code under test.
+Libra包含使用 [`proptest` ](https://github.com/AltSysrq/proptest)框架用Rust编写的 [property-based tests](https://blog.jessitron.com/2013/04/25/property-based-testing-what-is-it/) 。基于属性的测试生成随机测试用例，并断言被测代码的不变量（也称为_属性**properties**）。
 
-Some examples of properties tested in Libra Core:
+Libra中测试properties的一些示例：
 
-* Every serializer and deserializer pair is tested for correctness, with random inputs to the serializer. A pair of functions that are inverse of each other can be tested this way.
-* The results of executing common transactions through the VM are tested using randomly generated scenarios, and a simplified model as an *oracle*.
 
-A tutorial for `proptest` can be found in the [`proptest` book](https://altsysrq.github.io/proptest-book/proptest/getting-started.html). For further information on property testing refer to:
+- 使用序列化程序的随机输入测试每个序列化和反序列化对的正确性。任何一对互逆的函数都可以通过这种方式进行测试。
+- 通过VM执行公共交易的结果使用随机生成的场景进行测试，并通过oracle进行验证。
 
-* [What is Property Based Testing?](https://hypothesis.works/articles/what-is-property-based-testing/) (includes a comparison with fuzzing)
-* [An introduction to property-based testing](https://fsharpforfunandprofit.com/posts/property-based-testing/)
-* [Choosing properties for property-based testing](https://fsharpforfunandprofit.com/posts/property-based-testing-2/)
 
-**Fuzzing**
+`proptest` 教程可以在[`proptest` ](https://altsysrq.github.io/proptest-book/proptest/getting-started.html)书中找到。
 
-Libra contains harnesses for fuzzing crash-prone code like deserializers, which use [`libFuzzer`](https://llvm.org/docs/LibFuzzer.html) through [`cargo fuzz`](https://rust-fuzz.github.io/book/cargo-fuzz.html). For more, see the `testsuite/libra_fuzzer` directory.
+参考资料：
+
+
+- [What is Property Based Testing?](https://hypothesis.works/articles/what-is-property-based-testing/) (包含与fuzzing的比较)
+- [An introduction to property-based testing](https://fsharpforfunandprofit.com/posts/property-based-testing/)
+- [Choosing properties for property-based testing](https://fsharpforfunandprofit.com/posts/property-based-testing-2/)
+
+
+_条件编译测试Conditional compilation of tests_
+
+Libra 的 [conditionally compiles](https://doc.rust-lang.org/stable/reference/conditional-compilation.html) 代码只与测试相关，但不包含测试（unitary或其他）。这方面的例子包括proptest策略、特定特性的实现和派生（例如，偶尔的`Clone`）、helper函数等。由于Cargo[目前不适合激活基准中的特性](https://github.com/rust-lang/cargo/issues/2911)，因此我们依赖两个条件来执行此条件编译：
+
+
+- 测试标志(test flag)，由与条件测试专用代码位于同一crate中的依赖测试代码激活。
+- “测试(testing)”自定义功能，由作为条件测试专用代码的其他crate中的依赖测试代码激活（如下所示）。
+
+
+因此，推荐您按照以下方式设置专用测试代码。例如，我们将认为您在 `foo_crate`中定义一个测试专用的helper函数 `foo` ：
+
+
+- 1.在 `foo_crate/Cargo.toml`中定义“testing”标志，并将其设为非默认值：
+
+
+```
+[features]
+default = []
+testing = []
+```
+
+- 2.使用测试标志（用于in-crate调用方）和“testing”自定义功能（用于out-of-crate调用方）为您的测试专用helper foo添加注解
+
+
+```
+#[cfg(any(test, feature = "testing"))]
+fn foo() { ... }
+```
+
+- 3.将激活“testing”功能的开发依赖项添加到只导入这个测试专用成员的crates中：
+
+
+```
+[dev-dependencies.foo_crate]
+path = { "<same as the one in [dependencies]>"}
+features = ["testing"]
+```
+
+- 4.（可选）使用 `cfg_attr` 使测试专用特性派生成为条件：
+
+
+```
+#[cfg_attr(any(test, feature = "testing"), derive(FooTrait))]
+#[derive(Debug, Display, ...)] // inconditional derivations
+struct Foo { ... }
+```
+
+- 5.（可选）为调用仅包含测试成员的crates的crates设置功能传递性。假设是  `bar_crate` 的情况，它通过其测试helpers调用 `foo_crate` 来使用您的测试专用Foo。下面是如何设置 `bar_crate/Cargo.toml`
+
+
+```
+[features]
+default = []
+testing = ["foo_crate/testing"]
+```
+
+_集成测试的最后一个注意事项_：所有在另一个crate中使用条件测试专用元素的测试都需要通过 `Cargo.toml`中的 `[features]` 部分激活“testing”功能。[集成测试](https://doc.rust-lang.org/rust-by-example/testing/integration_testing.html)既不能依赖于 `test` 标志，也不能有适当的 `Cargo.toml` 去激活特性。因此，在Libra 代码库中，我们建议将依赖于测试专用代码的集成测试提取到它们自己的crate中。您可以在 `language/vm/serializer_tests` 查看这种提取集成测试的示例。
+
+开发人员注意：我们使用特性重新导出（在 `Cargo.toml` 的 `[features]`部分中）的原因是配置文件不足以激活`"testing"`特性标志。详见[cargo-issue #291](https://github.com/rust-lang/cargo/issues/2911) ）。
+
+_模糊测试Fuzzing_
+
+Libra包含用于模糊崩溃代码（如反序列化程序）的保护带，可以通过 [`cargo fuzz`](https://rust-fuzz.github.io/book/cargo-fuzz.html)使用 [`libFuzzer`](https://llvm.org/docs/LibFuzzer.html) 引入。有关更多示例，请参见 `testsuite/libra_fuzzer`目录。
