@@ -1,38 +1,21 @@
 ---
 id: security
-title: Reporting Vulnerabilities
+title: 报告漏洞
 ---
 
-This document outlines security procedures and general policies for the Libra project.
+原文链接：[https://developers.libra.org/docs/policies/security](https://developers.libra.org/docs/policies/security)<br/>
+译者：Humyna<br/>
 
-> **Note**: As Libra Core is currently in the prototype stage and does not power a blockchain with a currency that has real-world value, our security procedures are not fully in place. We will release a more complete disclosure policy prior to the launch of the mainnet.
+文档概述了Libra项目的安全程序和一般政策。
 
-## Reporting a Bug
+> 注意: 因为Libra Core目前仍处于原型阶段，无法为具有真实价值的加密货币的区块链提供动力，因此我们的安全程序尚未完全到位。我们将在主网mainnet发布之前发布一个更完整的信息披露政策。
 
-The Libra team and community take all security bugs in the Libra project
-seriously. Thank you for improving the security of Libra. We appreciate your
-efforts and responsible disclosure. We will make every effort to acknowledge
-your contributions.
+## 报告错误
 
-Report security bugs by emailing
-[security@libra.org](mailto:security@libra.org).
+Libra团队和社区认真对待Libra项目中的所有安全漏洞，以确保Libra区块链的安全。
+请在[Hackerone](https://hackerone.com/users/sign_in)提交Libra安全漏洞。
+您还可以通过[security@libra.org](mailto:security@libra.org)直接发送电子邮件来报告安全漏洞。
+感谢您改进Libra区块链的安全性！感谢您的努力和负责任的披露，我们将尽一切努力及时确认您的贡献。
 
-A member of the security team will acknowledge your email. After the initial
-reply to your report is sent, the security team will try to keep you informed
-on the progress towards a fix and a full announcement. The security team may
-ask you for additional information or guidance.
-
-## Disclosure Policy
-
-When the security team receives a security bug report, they will assign it to a
-primary handler. The primary handler will coordinate the fix and release
-process which involves the following steps:
-
-  * Confirm the problem and determine the affected versions.
-  * Audit code to find any potential similar problems.
-  * Prepare fixes for all releases that are still under maintenance.
-
-## Comments on This Policy
-
-If you have suggestions on how this process could be improved, please submit a
-pull request.
+## 对本政策的评论
+如果您对如何改进此过程有任何建议，请提交PR。
