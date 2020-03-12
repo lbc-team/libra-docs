@@ -35,7 +35,7 @@ const siteConfig = {
   headerLinks: [
     {href: 'https://learnblockchain.cn', label: '首页'},
     {doc: 'welcome-to-libra', label: '文档'},
-    
+
     {blog: true, label: "Blog" },
     {href: 'https://libra.org', label: 'Libra官网'},
     {href: 'https://github.com/libra/libra', label: 'GitHub'}
@@ -79,8 +79,8 @@ const siteConfig = {
     `${baseUrl}js/segment.js`,
     `${baseUrl}js/clipboardjs.2.0.0.min.js`,
     `${baseUrl}js/forms.js`,
-     // `${baseUrl}js/docsearch.min.js`,
-     // `${baseUrl}js/search.js`,
+    `${baseUrl}js/docsearch.min.js`,
+    `${baseUrl}js/search.js`,
   ],
 
   // Custom markdown functions
